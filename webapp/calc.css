@@ -1,0 +1,74 @@
+header {
+    background-color: #8193D3;
+}
+ul {
+    list-style: none;
+    margin:0;
+    padding:0;
+    overflow: hidden;
+    background-color: #8193D3;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+li {
+    float: left;
+}
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    padding: 20px 20px;
+    font-size: 15px;
+}
+li a:hover:not(.active){
+    background-color: #894B77;
+    color: black;
+}
+.active {
+    background-color: #894B77;
+}
+body {
+    background-color: #8193D3;
+    }
+.calc{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+table {
+  margin: auto;
+  background: rgb(2,0,36);
+    background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(115,115,215,1) 0%, rgba(188,184,255,1) 0%, rgba(196,221,255,1) 52%, rgba(220,218,244,1) 68%, rgba(255,255,255,1) 90%);
+  width: 295px;
+  height: 325px;
+  text-align: center;
+  border-radius: 4px;
+  padding: 20px;
+}
+#result{
+  width: 250px;
+  font-size: 26px;
+  text-align: center;
+  background-color: white;
+  float: center;
+}
+input, button {
+  outline: 0;
+  position: relative;
+  left: 5px;
+  top: 5px;
+  border: 0;
+  color: #03045E;;
+  background-color:white ;
+  border-radius: 4px;
+  width: 60px;
+  height: 50px;
+  float: left;
+  margin: 5px;
+  font-size: 20px;
+  box-shadow: 0 4px rgba(0,0,0,0.2);
+}
