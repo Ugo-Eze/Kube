@@ -1,0 +1,32 @@
+version: v1.0
+name: Pipeline 2
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+blocks:
+  - name: Deploy to Kubernetes
+    task:
+      jobs:
+        - name: Deploy
+          commands:
+            - checkout
+            - kubectl get nodes
+            - kubectl get pods
+            - envsubst < deployment.yaml | tee deployment.yaml
+            - kubectl apply -f deployment.yaml
+      secrets:
+        - name: do-k8s
+        - name: dockerhub
+  - name: Tag latest release
+    task:
+      secrets:
+        - name: do-k8s
+        - name: dockerhub
+      jobs:
+        - name: docker tag latest
+          commands:
+            - 'echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin'
+            - 'docker pull "${DOCKER_USERNAME}"/webapp:$SEMAPHORE_WORKFLOW_ID'
+            - 'docker tag "${DOCKER_USERNAME}"/webapp:$SEMAPHORE_WORKFLOW_ID "${DOCKER_USERNAME}"/webapp:latest'
+            - 'docker push "${DOCKER_USERNAME}"/webapp:latest'
