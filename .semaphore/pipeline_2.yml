@@ -27,6 +27,6 @@ blocks:
         - name: docker  tag latest
           commands:
             - 'echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin'
-            - 'docker pull "${DOCKER_USERNAME}"/webapp:$SEMAPHORE_WORKFLOW_ID'
-            - 'docker tag "${DOCKER_USERNAME}"/webapp:$SEMAPHORE_WORKFLOW_ID "${DOCKER_USERNAME}"/webapp:latest'
-            - 'docker push "${DOCKER_USERNAME}"/webapp:latest'
+            - 'docker pull "${DOCKER_USERNAME}"/web-app:$SEMAPHORE_WORKFLOW_ID'
+            - 'docker tag "${DOCKER_USERNAME}"/web-app:$SEMAPHORE_WORKFLOW_ID "${DOCKER_USERNAME}"/web-app:latest'
+            - 'docker push "${DOCKER_USERNAME}"/web-app:latest'
