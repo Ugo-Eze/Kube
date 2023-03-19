@@ -1,0 +1,35 @@
+# deployment.yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-app
+  template:
+    metadata:
+      labels:
+        app: web-app
+    spec:
+      containers:
+        - name: web-app
+          image: ugoeze/web-app
+      imagePullSecrets: 
+        - name: dockerhub-user
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-app
+spec:
+  selector:
+    app: web-app-pod
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80
+
