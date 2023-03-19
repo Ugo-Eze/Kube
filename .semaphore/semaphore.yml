@@ -11,6 +11,6 @@ blocks:
         - name: Get nodes
           commands:
             - checkout
-            - doctl kubernetes cluster kubeconfig save terraform-cluster
+            - doctl auth init
       secrets:
         - name: do-k8s
