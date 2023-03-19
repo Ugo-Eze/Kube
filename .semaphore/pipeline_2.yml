@@ -24,7 +24,7 @@ blocks:
         - name: do-k8s
         - name: dockerhub
       jobs:
-        - name: docker tag latest
+        - name: docker  tag latest
           commands:
             - 'echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin'
             - 'docker pull "${DOCKER_USERNAME}"/webapp:$SEMAPHORE_WORKFLOW_ID'
