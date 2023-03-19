@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: web-app
-          image: ugoeze/web-app
+          image: ugoeze/web-app:$SEMAPHORE_WORKFLOW_ID
       imagePullSecrets: 
         - name: dockerhub-user
 
