@@ -11,6 +11,6 @@ blocks:
         - name: Get nodes
           commands:
             - checkout
-            - Kubectl get nodes
+            - kubectl get nodes
       secrets:
         - name: do-k8s
