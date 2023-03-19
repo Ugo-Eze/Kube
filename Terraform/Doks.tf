@@ -1,3 +1,5 @@
+#This script is to create a DO Cluster using Terraform
+
 variable "do_token" {}
 
 terraform {
