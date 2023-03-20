@@ -5,12 +5,11 @@ agent:
     type: e1-standard-2
     os_image: ubuntu2004
 blocks:
-  - name: Talk to K8s
+  - name: Get nodes
     task:
       jobs:
-        - name: Get nodes
+        - name: get nodes
           commands:
-            - checkout
             - kubectl get nodes
       secrets:
         - name: do-k8s
@@ -20,5 +19,5 @@ after_pipeline:
       - name: 'Job #1'
         commands: []
 promotions:
-  - name: Deploy to kebernetes
+  - name: Deploy
     pipeline_file: pipeline_2.yml

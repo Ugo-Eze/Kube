@@ -5,28 +5,13 @@ agent:
     type: e1-standard-2
     os_image: ubuntu2004
 blocks:
-  - name: Deploy to Kubernetes
+  - name: Deploy to kubernetes
     task:
       jobs:
-        - name: Deploy
+        - name: Deployment
           commands:
             - checkout
-            - kubectl get nodes
-            - kubectl get pods
-            - envsubst < webapp/Deployment.yaml | tee webapp/Deployment.yaml
-            - kubectl apply -f webapp/Deployment.yaml
+            - kubectl apply -f microservices-demo/deploy/kubernetes/complete-demo.yaml
       secrets:
         - name: do-k8s
         - name: dockerhub
-  - name: Tag latest release
-    task:
-      secrets:
-        - name: do-k8s
-        - name: dockerhub
-      jobs:
-        - name: docker  tag latest
-          commands:
-            - 'echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin'
-            - 'docker pull "${DOCKER_USERNAME}"/web-app:1.0'
-            - 'docker tag "${DOCKER_USERNAME}"/web-app:1.0 "${DOCKER_USERNAME}"/web-app:1.0'
-            - 'docker push "${DOCKER_USERNAME}"/web-app:1.0'
