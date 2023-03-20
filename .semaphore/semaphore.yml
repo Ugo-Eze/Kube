@@ -5,13 +5,13 @@ agent:
     type: e1-standard-2
     os_image: ubuntu2004
 blocks:
-  - name: Talk to K8s
+  - name: Terraform
     task:
       jobs:
-        - name: Get nodes
+        - name: Initialize terraform
           commands:
             - checkout
-            - kubectl get nodes
+            - terraform init
       secrets:
         - name: do-k8s
 after_pipeline:
