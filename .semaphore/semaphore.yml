@@ -14,11 +14,14 @@ blocks:
             - terraform init
       secrets:
         - name: do-k8s
+  - name: Terraform
+    task:
+      jobs:
+        - name: Get terraform plan
+          commands:
+            - terraform plan
 after_pipeline:
   task:
     jobs:
       - name: 'Job #1'
         commands: []
-promotions:
-  - name: Deploy to kebernetes
-    pipeline_file: pipeline_2.yml
