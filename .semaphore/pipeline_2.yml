@@ -11,9 +11,6 @@ blocks:
         - name: Deployment
           commands:
             - checkout
-            - kubectl get nodes
-            - kubectl get pods
-            - kubectl create namespace sock-shop
             - kubectl apply -f microservices-demo/complete-demo.yaml
       secrets:
         - name: do-k8s
