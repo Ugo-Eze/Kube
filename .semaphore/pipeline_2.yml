@@ -1,0 +1,17 @@
+version: v1.0
+name: Pipeline 2
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+blocks:
+  - name: Deploy to kubernetes
+    task:
+      jobs:
+        - name: Deployment
+          commands:
+            - checkout
+            - kubectl get nodes
+            - kubectl get pods
+            - kubectl create namespace sock-shop
+            - kubectl apply -f complete-demo.yaml

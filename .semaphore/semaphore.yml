@@ -5,23 +5,19 @@ agent:
     type: e1-standard-2
     os_image: ubuntu2004
 blocks:
-  - name: Terraform
+  - name: Get nodes
     task:
       jobs:
-        - name: Initialize terraform
+        - name: get nodes
           commands:
-            - checkout
-            - terraform init
+            - kubectl get nodes
       secrets:
         - name: do-k8s
-  - name: Terraform
-    task:
-      jobs:
-        - name: Get terraform plan
-          commands:
-            - terraform plan
 after_pipeline:
   task:
     jobs:
       - name: 'Job #1'
         commands: []
+promotions:
+  - name: Deploy
+    pipeline_file: pipeline_2.yml
