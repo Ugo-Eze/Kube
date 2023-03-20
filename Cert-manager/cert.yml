@@ -21,7 +21,7 @@ spec:
             class: nginx
 ---
 apiVersion: networking.k8s.io/v1
- kind: Ingress
+kind: Ingress
 metadata:
   name: ingress-echo
   namespace: backend
