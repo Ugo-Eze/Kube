@@ -15,7 +15,9 @@ spec:
     spec:
       containers:
         - name: web-app
-          image: ugoeze/web-app
+          image: ugoeze/web-app:1.0
+          ports:
+            - containerPort: 80
       imagePullSecrets: 
         - name: dockerhub-user
 
