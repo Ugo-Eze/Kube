@@ -15,3 +15,6 @@ blocks:
             - kubectl get pods
             - kubectl create namespace sock-shop
             - kubectl apply -f complete-demo.yaml
+      secrets:
+        - name: do-k8s
+        - name: dockerhub
