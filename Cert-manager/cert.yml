@@ -38,4 +38,8 @@ spec:
     secretName: letsencrypt-nginx
   rules:
     - host: ugochidevops.me
+<<<<<<< HEAD
  
+=======
+    
+>>>>>>> 19262ea04c09b43a85c1095a449618ecb2c7a58c
