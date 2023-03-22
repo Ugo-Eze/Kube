@@ -1,45 +1,40 @@
-# deployment.yml
-apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: letsencrypt-nginx
-  namespace: 
-spec:
-  # ACME issuer configuration
-  # `email` - the email address to be associated with the ACME account (make sure it's a valid one)
-  # `server` - the URL used to access the ACME server’s directory endpoint
-  # `privateKeySecretRef` - Kubernetes Secret to store the automatically generated ACME account private key
-  acme:
-    email: ugochi@ugochidevops.me
-    server: https://acme-v02.api.letsencrypt.org/directory
-    privateKeySecretRef:
-      name: letsencrypt-nginx-private-key
-    solvers:
-      # Use the HTTP-01 challenge provider
-      - http01:
-          ingress:
-            class: nginx
+
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+kind: Service
+apiVersion: v1
 metadata:
-  name: ingress-echo
-  namespace: 
+  name: http2-with-cert-minimal
   annotations:
-    kubernetes.io/ingress.class: nginx
-    cert-manager.io/issuer: letsencrypt-nginx
-    cert-manager.io/issue-temporary-certificate: "true"
+    service.beta.kubernetes.io/do-loadbalancer-protocol: "http2"
+    service.beta.kubernetes.io/do-loadbalancer-certificate-id: "6fafcc1a36f1edf17edcb17d253b8a9566111a9a" 
 spec:
-  tls:
-  - hosts:
-    - ugochidevops.me
-    - sockshop.ugochidevops.me
-    - webapp.ugochidevops.me
-    secretName: letsencrypt-nginx
-  rules:
-    - host: ugochidevops.me
-<<<<<<< HEAD
- 
-=======
-    
->>>>>>> 19262ea04c09b43a85c1095a449618ecb2c7a58c
+  type: LoadBalancer
+  selector:
+    app: nginx
+  ports:
+    - name: http2
+      protocol: TCP
+      port: 443
+      targetPort: 80
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+          protocol: TCP
