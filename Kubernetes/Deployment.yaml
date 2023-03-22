@@ -3,15 +3,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web-app-deploy
+  labels:
+    name: web-app
+    app: website
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: web-app
+      name: web-app-pod
+      app: website
+
   template:
     metadata:
+      name: web-app-pod
       labels:
-        app: web-app
+         name: web-app-pod
+         app: website
     spec:
       containers:
         - name: web-app
@@ -22,14 +29,19 @@ spec:
         - name: dockerhub-user
 
 ---
+#service
 
 apiVersion: v1
 kind: Service
 metadata:
   name: web-app
+  labels:
+    name: web-app-service
+    app: website
 spec:
   selector:
-    app: web-app-pod
+    name: web-app-pod
+    app: website
   type: LoadBalancer
   ports:
     - port: 80
