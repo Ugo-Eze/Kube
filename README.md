@@ -1,6 +1,12 @@
 
 **Cloud Engineering Third Semester Examination Project**
 
+**Provisions**
+
+1. [Portfolio](ugochi.ugochidevops.me)
+
+2. [Sockshop](sockshop.ugochidevops.me)
+
 Overview
 
 We deploy our microservices-based architecture on Kubernetes and we need to create a clear IaaC (Infrastructure as Code) deployment to be able to deploy our services in a fast manner.
