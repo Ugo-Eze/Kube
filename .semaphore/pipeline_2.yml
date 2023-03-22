@@ -11,7 +11,17 @@ blocks:
         - name: Deployment
           commands:
             - checkout
-            - kubectl apply -f microservices-demo/deploy/kubernetes/complete-demo.yaml
+            - kubectl apply -f kubernetes/complete-demo.yaml
       secrets:
         - name: do-k8s
         - name: dockerhub
+  - name: Web app 2
+    task:
+      secrets:
+        - name: do-k8s
+        - name: dockerhub
+      jobs:
+        - name: Deploy web-app to kubernetes
+          commands:
+            - checkout
+            - kubectl apply -f kubernetes/Deployment.yaml
